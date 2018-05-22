@@ -1,0 +1,12 @@
+node_modules/
+npm-debug.log
+package-lock.json
+yarn-error.log
+dist/
+server/uploads
+server/error.log
+server/combined.log
+.env
+assets/img/
+nginx/site.crt
+nginx/site.key

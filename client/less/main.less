@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.24;
+  font-size: 14px;
+  // padding: 0 2px;
+  margin: 0;
+  background: #fdfdfd;
+}
+
+a {
+  text-decoration: none;
+  color: #0366d6;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    // color: inherit;
+  }
+}
+
+.anchor-like {
+
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #0366d6;
+  font-size: inherit;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+}
+
+input,
+textarea,
+button {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.root-inner {
+  padding: 0 40px;
+  margin: 0 auto;
+  max-width: 1300px;
+
+  @media (max-width:620px) {
+    padding: 0 20px;
+  }
+}
+
+.pointer{
+  cursor: pointer;
+}
