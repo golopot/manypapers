@@ -1,4 +1,5 @@
 import React from 'react'
+import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown'
 import styled from 'styled-components'
 import Context from './Context'
 
@@ -44,6 +45,52 @@ class SearchBox extends React.Component {
 }
 
 
+const DropdownStyles = styled.span`
+  .dropdown {
+    display: inline-block;
+  }
+
+  .dropdown__content {
+    display: none;
+    position: absolute;
+    margin-left: -11px;
+    margin-top: 7px;
+    border: 1px solid #eee;
+
+    > div {
+      padding: 6px 6px;
+    }
+  }
+
+  .dropdown--active .dropdown__content {
+    display: block;
+  }
+`
+
+function AccountDropdown({ logout }) {
+  return (
+    <DropdownStyles>
+      <Dropdown className="account-dropdown">
+        <DropdownTrigger>
+          <button className="anchor-like">選單</button>
+        </DropdownTrigger>
+        <DropdownContent>
+          <div>
+            <a href="/dashboard">我的論文</a>
+          </div>
+          <div>
+            <a href="settings">設定</a>
+          </div>
+          <div>
+            <button class="anchor-like" onClick={logout} >登出</button>
+          </div>
+        </DropdownContent>
+      </Dropdown>
+    </DropdownStyles>
+  )
+}
+
+
 export default function Header() {
   return (
     <StyledHeader>
@@ -58,10 +105,7 @@ export default function Header() {
 
             context.userId
               ? (
-                <React.Fragment>
-                  <span>{context.userId}</span>{' '}
-                  <button className="anchor-like" onClick={() => context.setUserId('')}>Logout</button>
-                </React.Fragment>
+                <AccountDropdown logout={() => context.setUserId('')} />
               )
               : <a href="/login-google">登入</a>
           )}
