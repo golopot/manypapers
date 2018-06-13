@@ -69,6 +69,7 @@ export default class Uploader extends Component {
     const { waiting, error } = this.state
     return (
       <Div>
+        <h1>上傳論文</h1>
         <form ref={(el) => { this.form = el }} className="upload">
           <div>
             <input name="file" type="file" onChange={this.onFileChange} accept=".pdf" />

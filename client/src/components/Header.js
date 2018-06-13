@@ -76,10 +76,7 @@ function AccountDropdown({ logout }) {
         </DropdownTrigger>
         <DropdownContent>
           <div>
-            <a href="/dashboard">我的論文</a>
-          </div>
-          <div>
-            <a href="settings">設定</a>
+            <a href="/dashboard">帳號設定</a>
           </div>
           <div>
             <button class="anchor-like" onClick={logout} >登出</button>

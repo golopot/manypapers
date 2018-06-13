@@ -28,7 +28,7 @@ const populate = (entries) => {
   const all = entries.map(x =>
     new Paper({
       title: x.title,
-      authors: x.authors.join(','),
+      authors: x.authors,
       abstract: x.summary,
       submit_date: x.published,
       edit_date: x.updated,

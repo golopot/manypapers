@@ -1,6 +1,7 @@
 import PaperPage from './components/PaperPage'
 import Home from './components/Home'
 import UploadPage from './components/UploadPage'
+import DashboardPage from './components/DashboardPage'
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/upload',
     component: UploadPage,
+  },
+  {
+    path: '/dashboard',
+    component: DashboardPage,
   },
 ]
 

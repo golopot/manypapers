@@ -5,13 +5,11 @@ import Header from './Header'
 import Uploader from './Uploader'
 
 
-export default class UploadPage extends React.Component {
-  render() {
-    return (
-      <div>
-        <Header />
-        <Uploader />
-      </div>
-    )
-  }
+export default function UploadPage() {
+  return (
+    <div>
+      <Header />
+      <Uploader />
+    </div>
+  )
 }

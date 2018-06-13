@@ -14,7 +14,7 @@ const Item = styled.div`
 const PaperItem = ({ paper }) => (
   <Item>
     <div className="up"><a href={`/paper/${paper._id}`}>{paper.title}</a>{' '}</div>
-    <div className="down">{paper.authors}</div>
+    <div className="down">{paper.authors.join(', ')}</div>
   </Item>
 )
 

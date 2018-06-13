@@ -51,9 +51,12 @@ const POST = [
       return
     }
 
+    const authorsList = authors.split(',')
+      .map(x => x.trim())
+
     const doc = {
       title,
-      authors,
+      authors: authorsList,
       abstract,
       submitter_id: req.userId,
       submit_date: new Date(),

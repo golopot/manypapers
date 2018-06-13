@@ -7,7 +7,7 @@ module.exports = mongoose.model(
   mongoose.Schema(M.translate({
     _id: M.string().required(),
     title: M.string().required(),
-    authors: M.string().required(),
+    authors: [M.string()],
     submitter_id: M.string().required(),
     abstract: M.string().required(),
     submit_date: M.date().required(),
