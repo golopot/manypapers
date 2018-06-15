@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const Item = styled.div`
   padding: 6px 0;
+  line-height: 1.4
 
   .up {
     font-size: 16px;

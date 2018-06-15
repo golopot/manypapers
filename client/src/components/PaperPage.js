@@ -14,6 +14,7 @@ const routerPropTypes = {
 const StyledPaperPage = styled.div`
 
   main {
+
     display: flex;
 
     > .left {
@@ -30,18 +31,10 @@ const StyledPaperPage = styled.div`
       }
     }
   }
-
-  .authors {
-    font-size: 20px;
-    padding: 10px 0;
-  }
   .abstract {
-    font-size: 20px;
-    padding: 10px 0;
+    line-height: 1.8
   }
   .title {
-    font-size: 26px;
-    padding: 20px 0;
   }
   .download {
     display: inline-block;
@@ -53,6 +46,7 @@ const StyledPaperPage = styled.div`
     border: 2px solid #0a0a0a;
     background: #c2d081;
     margin: 22px 0;
+    line-height: 1.4;
   }
 
   ul {
@@ -88,7 +82,7 @@ class PaperPage extends Component {
         <main>
           <div className="left">
             <h1>{title}</h1>
-            <div>{abstract}</div>
+            <section className="abstract">{abstract}</section>
           </div>
           <aside>
             <div>
