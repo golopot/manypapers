@@ -12,7 +12,7 @@ const google = (req, res) => {
     client_id: config.oauth_id_google,
     redirect_uri: `${config.protocol}://${config.hostname}/oauth-callback`,
     response_type: 'code',
-    scope: 'https://www.googleapis.com/auth/plus.me',
+    scope: 'https://www.googleapis.com/auth/userinfo.email',
     include_granted_scopes: 'true',
   }
 
@@ -60,14 +60,15 @@ const callback = (req, res, next) => {
       })
   )
 
-  const createUser = ({ id, email }) => (
+  const createUser = ({ id, email, name }) => (
     new User({
       google_id: id,
       email,
+      display_name: name,
     })
       .saveWithAutoId()
       .then(x => (logger.info(`Created user ${x}`), x))
-      .then(_id => User.collection.findOne({ _id }))
+      .then(user => User.collection.findOne({ _id: user._id }))
   )
 
   const findOrCreateUser = info => (

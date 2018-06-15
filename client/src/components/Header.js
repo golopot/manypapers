@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown'
 import styled from 'styled-components'
 import Context from './Context'
+
 
 const StyledHeader = styled.header`
 
@@ -79,12 +81,16 @@ function AccountDropdown({ logout }) {
             <a href="/dashboard">帳號設定</a>
           </div>
           <div>
-            <button class="anchor-like" onClick={logout} >登出</button>
+            <button className="anchor-like" onClick={logout} >登出</button>
           </div>
         </DropdownContent>
       </Dropdown>
     </DropdownStyles>
   )
+}
+
+AccountDropdown.propTypes = {
+  logout: PropTypes.func.isRequired,
 }
 
 

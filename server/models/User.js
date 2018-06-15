@@ -14,7 +14,6 @@ const User = mongoose.model(
     .method('saveWithAutoId', saveWithAutoId)
 )
 
-User.collection.createIndex({ id: 1 }, { unique: true })
 User.collection.createIndex({ google_id: 1 }, { unique: true })
 
 module.exports = User

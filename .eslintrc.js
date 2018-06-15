@@ -27,5 +27,6 @@ module.exports = {
     'no-use-before-define': 0,
     'no-underscore-dangle': 0,
     'no-sequences': 0,
+    camelcase: 0,
   },
 }

@@ -8,7 +8,7 @@ const getAuthtoken = userId => jwt.sign({ userId }, appsecret)
 const auth = (req, res, next) => {
   /* csrf check */
   if (!req.headers['x-csrf']) {
-    throw badRequest('Authenticated API requests must include the header `x-csrf: 1`.')
+    throw badRequest('API requests that requires authentication must include the header `x-csrf: 1`.')
   }
 
   jwt.verify(req.cookies.authtoken, appsecret, (err, decoded) => {
