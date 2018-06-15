@@ -11,11 +11,15 @@ class App extends React.Component {
   }
 
   state = {
-    userId: Cookies.get('userId'),
+    userId: '',
     setUserId: (userId) => {
       Cookies.set('userId', userId)
       this.setState({ userId })
     },
+  }
+
+  componentDidMount() {
+    this.setState({ userId: Cookies.get('userId') })
   }
 
   render() {

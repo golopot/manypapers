@@ -77,7 +77,7 @@ app.get(routes.map(x => x.path), (req, res, next) => {
 
         res.send(html({
           meta: metaTagsServer.renderToString(),
-          initialData: serialize(data),
+          initialData: serialize(data || {}),
           styles: sheet.getStyleTags(),
           body,
         }))

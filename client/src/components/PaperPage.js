@@ -91,7 +91,7 @@ class PaperPage extends Component {
 
             <div>
               <h3>作者</h3>
-              <ul>{authors.map(x => <li>{x}</li>)}</ul>
+              <ul>{authors.map(x => <li key={x}>{x}</li>)}</ul>
             </div>
 
             <div>
