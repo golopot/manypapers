@@ -57,7 +57,7 @@ const POST = [
     const doc = {
       title,
       authors: authorsList,
-      abstract,
+      abstract: abstract.replace(/\r\n/g, '\n'),
       submitter_id: req.userId,
       submit_date: new Date(),
       deleted: false,
@@ -80,8 +80,33 @@ const POST = [
   },
 ]
 
+const PATCH$ = [
+  upload.none(),
+  (req, res, next) => {
+    const { title, abstract, authors } = req.body
+    if (!title.length >= 1) {
+      next(badRequest('title is invalid.'))
+      return
+    }
+
+    const authorsList = authors.split(',')
+      .map(x => x.trim())
+
+    const doc = {
+      title,
+      authors: authorsList,
+      abstract: abstract.replace(/\r\n/g, '\n'),
+    }
+
+    Paper.updateOne({ _id: req.params.id }, { $set: doc })
+      .then(r => console.log(r))
+      .then(() => res.json({}))
+      .catch(next)
+  }]
+
 module.exports = {
   GET,
   GET$,
   POST,
+  PATCH$,
 }

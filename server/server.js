@@ -50,7 +50,7 @@ app.get(routes.map(x => x.path), (req, res, next) => {
     const fetchData = activeRoute.component.dataUrl
       ? fetch(`http://localhost:9090${activeRoute.component.dataUrl(id)}`)
         .then(r => r.json())
-      : Promise.resolve()
+      : Promise.resolve({})
 
     fetchData
       .then((data) => {
@@ -77,7 +77,7 @@ app.get(routes.map(x => x.path), (req, res, next) => {
 
         res.send(html({
           meta: metaTagsServer.renderToString(),
-          initialData: serialize(data || {}),
+          initialData: serialize(data),
           styles: sheet.getStyleTags(),
           body,
         }))

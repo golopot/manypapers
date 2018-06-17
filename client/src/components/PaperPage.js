@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import MetaTags from 'react-meta-tags'
 import styled from 'styled-components'
 import Header from './Header'
+import Context from './Context'
 
 const routerPropTypes = {
   match: PropTypes.object.isRequired,
@@ -14,15 +15,27 @@ const routerPropTypes = {
 const StyledPaperPage = styled.div`
 
   main {
-
     display: flex;
 
-    > .left {
+    @media (max-width:620px) {
+      flex-wrap: wrap;
     }
 
     aside {
-      min-width: 260px;
-      padding: 0 24px;
+      padding-top: 24px;
+      min-width: 220px;
+      padding-left: 48px;
+      margin-left: auto;
+
+      @media (max-width: 840px) {
+        min-width: 140px;
+        padding-left: 12px;
+      }
+
+      @media (max-width:620px) {
+        padding-left: 0;
+        margin-left: 0;
+      }
 
       h3 {
         font-weight: 400;
@@ -36,7 +49,8 @@ const StyledPaperPage = styled.div`
   }
   .title {
   }
-  .download {
+
+  .button {
     display: inline-block;
     width: 110px;
     padding: 3px 0px;
@@ -45,8 +59,12 @@ const StyledPaperPage = styled.div`
     border-radius: 3px;
     border: 2px solid #0a0a0a;
     background: #c2d081;
-    margin: 22px 0;
+    margin: 3px 0;
     line-height: 1.4;
+  }
+
+  .edit {
+    background-color: #e4c75c;
   }
 
   ul {
@@ -86,8 +104,16 @@ class PaperPage extends Component {
           </div>
           <aside>
             <div>
-              <a href={`/pdf/${id}`} className="download">Download</a>
+              <a href={`/pdf/${id}`} className="button">Download</a>
             </div>
+
+            <Context.Consumer>
+              { ({ userId }) => userId === submitter_id && (
+                <div>
+                  <a href={`/edit/${id}`} className="button edit">Edit</a>
+                </div>
+              )}
+            </Context.Consumer>
 
             <div>
               <h3>作者</h3>

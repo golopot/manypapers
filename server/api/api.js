@@ -9,6 +9,7 @@ const router = express.Router()
 router.get('/paper', paper.GET)
 router.get('/paper/:id', paper.GET$)
 router.post('/paper', auth.auth, paper.POST)
+router.patch('/paper/:id', auth.auth, paper.PATCH$)
 router.get('/me', auth.auth, me.GET)
 router.patch('/me', auth.auth, me.PATCH)
 

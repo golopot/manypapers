@@ -7,6 +7,7 @@ import Context from './Context'
 
 const StyledHeader = styled.header`
 
+  line-height: 20px;
   padding-top: 10px;
   display: flex;
   justify-content: space-between;
