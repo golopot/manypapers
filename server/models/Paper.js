@@ -9,6 +9,7 @@ module.exports = mongoose.model(
     title: M.string().required(),
     authors: [M.string()],
     submitter_id: M.string().required(),
+    submitter_display_name: M.string().required(),
     abstract: M.string().required(),
     submit_date: M.date().required(),
     edit_date: M.date(),

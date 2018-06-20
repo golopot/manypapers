@@ -1,4 +1,5 @@
 const Paper = require('../models/Paper')
+const User = require('../models/User')
 const path = require('path')
 const upload = require('multer')({ dest: path.join(__dirname, '../uploads') })
 const Storage = require('@google-cloud/storage')
@@ -61,28 +62,35 @@ const POST = [
     const authorsList = authors.split(',')
       .map(x => x.trim())
 
-    const doc = {
-      title,
-      authors: authorsList,
-      abstract: abstract.replace(/\r\n/g, '\n'),
-      submitter_id: req.userId,
-      submit_date: new Date(),
-      deleted: false,
-    }
-    new Paper(doc)
-      .saveWithAutoId()
-      .then(({ _id }) =>
-        storage
-          .bucket('manypapers-dev')
-          .upload(req.file.path, {
-            destination: `${_id}.pdf`,
-            resumable: false,
-          })
-          .then(() => unlink(req.file.path))
-          .then(() => {
-            res.json({ id: _id })
-            next()
-          }))
+    Promise.resolve()
+      .then(async () => {
+        const user = await User.findOne({ _id: req.userId })
+        if (user === null) throw badRequest(`User id not found: ${req.userId}`)
+
+        return new Paper({
+          title,
+          authors: authorsList,
+          abstract: abstract.replace(/\r\n/g, '\n'),
+          submitter_id: req.userId,
+          submitter_display_name: user.display_name,
+          submit_date: new Date(),
+          deleted: false,
+        })
+          .saveWithAutoId()
+          .then(({ _id }) =>
+            storage
+              .bucket('manypapers-dev')
+              .upload(req.file.path, {
+                destination: `${_id}.pdf`,
+                resumable: false,
+              })
+              .then(() => unlink(req.file.path))
+              .then(() => {
+                res.json({ id: _id })
+                next()
+              }))
+      })
+
       .catch(next)
   },
 ]

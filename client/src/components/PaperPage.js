@@ -88,6 +88,7 @@ class PaperPage extends Component {
   render() {
     const {
       title, authors, abstract, submit_date, submitter_id, pdf_url,
+      submitter_display_name,
     } = this.props.initialData
     const { id } = this.props.match.params
     return (
@@ -137,7 +138,7 @@ class PaperPage extends Component {
               <h3>提交者</h3>
               <ul>
                 <li>
-                  <div>{submitter_id}</div>
+                  <div><span title={submitter_id}>{submitter_display_name}</span></div>
                 </li>
               </ul>
             </div>
