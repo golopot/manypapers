@@ -65,6 +65,8 @@ const callback = (req, res, next) => {
       google_id: id,
       email,
       display_name: name,
+      create_date: new Date(),
+      role: 'normal',
     })
       .saveWithAutoId()
       .then(x => (logger.info(`Created user ${x}`), x))

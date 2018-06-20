@@ -88,7 +88,7 @@ class PaperPage extends Component {
   render() {
     const {
       title, authors, abstract, submit_date, submitter_id, pdf_url,
-      submitter_display_name,
+      submitter_display_name, is_sample,
     } = this.props.initialData
     const { id } = this.props.match.params
     return (
@@ -99,6 +99,7 @@ class PaperPage extends Component {
           {authors.map(x => <meta name="citation_author" content={x} id={`meta_tag_id_author_${x}`} key={x} />)}
           <meta name="citation_publication_date" content={submit_date.slice(0, 10).replace(/-/g, '/')} />
           <meta name="citation_online_date" content={submit_date.slice(0, 10).replace(/-/g, '/')} />
+          {is_sample && <meta name="robots" content="noindex" />}
         </MetaTags>
 
         <Header />
@@ -109,7 +110,7 @@ class PaperPage extends Component {
           </div>
           <aside>
             <div>
-              <a href={new URL(pdf_url).pathname} className="button">Download</a>
+              <a href={pdf_url} className="button">Download</a>
             </div>
 
             <Context.Consumer>
@@ -142,6 +143,19 @@ class PaperPage extends Component {
                 </li>
               </ul>
             </div>
+
+            {is_sample &&
+            <div>
+              <h3>備註</h3>
+              <ul>
+                <li>
+                  <div>This entry is a sample paper crawled from arXiv,
+                    intended for the prototyping this website.
+                  </div>
+                </li>
+              </ul>
+            </div>
+            }
           </aside>
         </main>
       </StyledPaperPage>

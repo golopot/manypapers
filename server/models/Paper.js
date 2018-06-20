@@ -14,6 +14,8 @@ module.exports = mongoose.model(
     submit_date: M.date().required(),
     edit_date: M.date(),
     delete_date: M.date(),
+    is_sample: M.boolean(),
+    sample_pdf_url: M.string(),
     deleted: M.boolean().required(),
   }))
     .method('saveWithAutoId', saveWithAutoId)

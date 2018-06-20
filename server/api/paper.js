@@ -22,7 +22,9 @@ const GET = (req, res, next) => {
     .then((docs) => {
       res.json(docs.map(x => ({
         ...x,
-        pdf_url: `${config.protocol}://${config.hostname}/pdf/${x._id}`,
+        pdf_url: x.is_sample
+          ? x.sample_pdf_url
+          : `${config.protocol}://${config.hostname}/pdf/${x._id}`,
       })))
       next()
     })
@@ -32,10 +34,12 @@ const GET = (req, res, next) => {
 const GET$ = (req, res, next) => {
   Paper.collection
     .findOne({ _id: req.params.id })
-    .then((doc) => {
+    .then((x) => {
       res.json({
-        ...doc,
-        pdf_url: `${config.protocol}://${config.hostname}/pdf/${doc._id}`,
+        ...x,
+        pdf_url: x.is_sample
+          ? x.sample_pdf_url
+          : `${config.protocol}://${config.hostname}/pdf/${x._id}`,
       })
       next()
     })
