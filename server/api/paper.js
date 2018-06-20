@@ -4,6 +4,7 @@ const upload = require('multer')({ dest: path.join(__dirname, '../uploads') })
 const Storage = require('@google-cloud/storage')
 const fs = require('fs')
 const unlink = require('util').promisify(fs.unlink)
+const config = require('../../config')
 
 const storage = new Storage({
   keyFilename: '/home/jchn/Krust-58cde96d52f7.json',
@@ -18,7 +19,10 @@ const GET = (req, res, next) => {
     .sort({ submit_date: -1 })
     .toArray()
     .then((docs) => {
-      res.json(docs)
+      res.json(docs.map(x => ({
+        ...x,
+        pdf_url: `${config.protocol}://${config.hostname}/pdf/${x._id}`,
+      })))
       next()
     })
     .catch(next)
@@ -28,7 +32,10 @@ const GET$ = (req, res, next) => {
   Paper.collection
     .findOne({ _id: req.params.id })
     .then((doc) => {
-      res.json(doc)
+      res.json({
+        ...doc,
+        pdf_url: `${config.protocol}://${config.hostname}/pdf/${doc._id}`,
+      })
       next()
     })
     .catch(next)

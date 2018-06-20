@@ -87,15 +87,19 @@ class PaperPage extends Component {
 
   render() {
     const {
-      title, authors, abstract, submit_date, submitter_id,
+      title, authors, abstract, submit_date, submitter_id, pdf_url,
     } = this.props.initialData
     const { id } = this.props.match.params
     return (
       <StyledPaperPage>
         <MetaTags>
           <meta name="citation_title" content={title} />
-          <meta name="citation_pdf_url" content={`http://domain/${id}`} />
+          <meta name="citation_pdf_url" content={pdf_url} />
+          {authors.map(x => <meta name="citation_author" content={x} id={`meta_tag_id_author_${x}`} key={x} />)}
+          <meta name="citation_publication_date" content={submit_date.slice(0, 10).replace(/-/g, '/')} />
+          <meta name="citation_online_date" content={submit_date.slice(0, 10).replace(/-/g, '/')} />
         </MetaTags>
+
         <Header />
         <main>
           <div className="left">
@@ -104,7 +108,7 @@ class PaperPage extends Component {
           </div>
           <aside>
             <div>
-              <a href={`/pdf/${id}`} className="button">Download</a>
+              <a href={new URL(pdf_url).pathname} className="button">Download</a>
             </div>
 
             <Context.Consumer>
