@@ -6,6 +6,7 @@ const Storage = require('@google-cloud/storage')
 const fs = require('fs')
 const unlink = require('util').promisify(fs.unlink)
 const config = require('../../config')
+const Joi = require('joi')
 
 const storage = new Storage({
   keyFilename: '/home/jchn/Krust-58cde96d52f7.json',
@@ -51,17 +52,24 @@ const POST = [
   (req, res, next) => {
     console.log(req.file)
 
+    const { error } = Joi.validate(req.body, Joi.object({
+      title: Joi.string().min(2).max(350).required(),
+      abstract: Joi.string().max(2500).required(),
+      authors: Joi.string().max(500).required(),
+    }))
+
+    if (error) {
+      next(badRequest(error.details.pop().message))
+      return
+    }
+
     if (req.file === undefined) {
       next(badRequest('Upload file is required.'))
       return
     }
+
     console.log(req.body)
     const { title, authors, abstract } = req.body
-
-    if (!title.length >= 1) {
-      next(badRequest('title is invalid.'))
-      return
-    }
 
     const authorsList = authors.split(',')
       .map(x => x.trim())

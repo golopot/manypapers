@@ -26,6 +26,7 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "fbemitter": "^2.1.1",
+    "joi": "^13.4.0",
     "js-cookie": "^2.2.0",
     "jsdom": "^11.11.0",
     "jsonwebtoken": "^8.3.0",
