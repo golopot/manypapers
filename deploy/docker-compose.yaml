@@ -1,0 +1,17 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - /srv/mongo:/data/db
+    network_mode: "host"
+
+  node:
+    build:
+      context: ../
+      dockerfile: ./deploy/Dockerfile-node
+    env_file:
+      - ./node.env
+    volumes:
+      - /home/ubuntu/storage-account.json:/run/storage-account.json
+    network_mode: "host"

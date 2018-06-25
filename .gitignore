@@ -10,3 +10,4 @@ server/combined.log
 assets/img/
 nginx/site.crt
 nginx/site.key
+deploy/node.env

@@ -8,9 +8,7 @@ const unlink = require('util').promisify(fs.unlink)
 const config = require('../../config')
 const Joi = require('joi')
 
-const storage = new Storage({
-  keyFilename: '/home/jchn/Krust-58cde96d52f7.json',
-})
+const storage = new Storage()
 
 
 const badRequest = x => x

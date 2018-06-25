@@ -1,8 +1,6 @@
 const Storage = require('@google-cloud/storage')
 
-const storage = new Storage({
-  keyFilename: '/home/jchn/Krust-58cde96d52f7.json',
-})
+const storage = new Storage()
 
 
 const GET$ = (req, res, next) => {

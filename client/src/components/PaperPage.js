@@ -21,6 +21,10 @@ const StyledPaperPage = styled.div`
       flex-wrap: wrap;
     }
 
+    .left {
+      flex-grow: 1;
+    }
+
     aside {
       padding-top: 24px;
       min-width: 220px;

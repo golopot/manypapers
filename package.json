@@ -8,7 +8,8 @@
     "db": "cd db; docker-compose -p paper-db up --build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./server ./client",
-    "spawn": "gnome-terminal -- yarn db && gnome-terminal -- yarn watch && yarn up"
+    "spawn": "gnome-terminal -- yarn db && gnome-terminal -- yarn watch && yarn up",
+    "build": "cd client && gulp && webpack"
   },
   "author": "",
   "private": true,
